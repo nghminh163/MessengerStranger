@@ -1,0 +1,39 @@
+{
+  "name": "MessengerStranger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nghminh163/MessengerStranger.git",
+  "author": "Nguyễn Hoàng Minh <nghminh163@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.4.0",
+    "body-parser": "^1.18.3",
+    "boom": "^7.3.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.2",
+    "jest": "^24.5.0",
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "start-babel": "babel-node server/",
+    "dev": "nodemon --exec babel-node server/",
+    "test": "jest test/",
+    "build": "babel -d ./dist ./server -s",
+    "clean": "rm -rf build && mkdir build",
+    "start": "node dist/index.js"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}
