@@ -1,8 +1,7 @@
 import express from "express";
-import path from "path";
 import bodyParser from "body-parser";
 
-// import { Webhook } from "./routes";
+import { Webhook } from "./routes";
 
 export const app = express();
 
@@ -11,7 +10,7 @@ app.use(bodyParser.json({ extended: true }));
 
 app.get("/ping", (req, res) => res.send("pong"));
 
-// app.use("/webhook", Webhook);
+app.use("/webhook", Webhook);
 
 function runServer(port = 3000, done) {
   app.listen(port, async err => {
