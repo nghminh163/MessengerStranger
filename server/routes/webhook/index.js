@@ -2,6 +2,7 @@ import { Router } from "express";
 import _ from "lodash";
 import Boom from "boom";
 import { VerifyToken } from "../../const";
+import BotHandle from "../../Chat";
 const router = Router();
 router.get("/", (req, res) => {
   const params = req.query;
@@ -25,6 +26,8 @@ router.post("/", (req, res) => {
       const pageId = webhook_event.recipient.id;
       const timestamp = webhook_event.timestamp;
       if (webhook_event.message) {
+        const text = webhook_event.message.text;
+        BotHandle.reply(senderId, pageId, timestamp, text);
       } else if (webhook_event.postback) {
       }
     });
