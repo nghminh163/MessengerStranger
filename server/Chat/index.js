@@ -1,7 +1,7 @@
 import customize from "./customize";
 import { FbSendMessage } from "../APIs/";
 import _ from "lodash";
-
+import Chatible from "./Chatible";
 export default new class BotHandle {
   checkFilter(input) {
     for (var filter of customize) {
@@ -13,7 +13,7 @@ export default new class BotHandle {
   async reply(senderId, pageId, timestamp, text) {
     const filterReply = this.checkFilter(text);
     if (_.isUndefined(filterReply)) {
-      //Không có
+      Chatible.handle(senderId, pageId, timestamp, text);
     } else {
       FbSendMessage(senderId, filterReply);
     }

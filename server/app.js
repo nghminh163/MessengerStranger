@@ -11,7 +11,6 @@ app.use(bodyParser.json({ extended: true }));
 app.get("/ping", (req, res) => res.send("pong"));
 
 app.use("/webhook", Webhook);
-
 function runServer(port = 3000, done) {
   app.listen(port, async err => {
     if (err) throw err;

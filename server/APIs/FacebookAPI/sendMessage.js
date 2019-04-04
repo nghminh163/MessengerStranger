@@ -14,7 +14,5 @@ export default (senderId, data) => {
       },
       message: data
     }
-  })
-    .then(res => {})
-    .catch(err => console.log(err));
+  }).catch(err => console.log(err));
 };
