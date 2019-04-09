@@ -30,8 +30,10 @@
     "dev": "nodemon --exec babel-node server/",
     "test": "jest test/",
     "build": "babel -d ./dist ./server -s",
-    "clean": "rm -rf build && mkdir build",
-    "start": "node dist/index.js"
+    "clean": "rm -rf dist && mkdir dist",
+    "start": "node dist/index.js",
+    "postinstall": "npm run build"
+
   },
   "babel": {
     "presets": [
