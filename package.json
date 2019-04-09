@@ -7,6 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
     "body-parser": "^1.18.3",
     "boom": "^7.3.0",
     "dotenv": "^7.0.0",
@@ -26,21 +28,30 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
+    "postinstall": "npm run build",
     "start-babel": "babel-node server/",
     "dev": "nodemon --exec babel-node server/",
     "test": "jest test/",
     "build": "babel -d ./dist ./server -s",
     "clean": "rm -rf dist && mkdir dist",
-    "start": "node dist/index.js",
-    "postinstall": "npm run build"
-
+    "start": "node dist/index.js"
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "regenerator": true
+        }
+      ]
     ]
   },
-  "jest":{
-    "setupFiles": ["<rootDir>/node_modules/regenerator-runtime/runtime"]
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/node_modules/regenerator-runtime/runtime"
+    ]
   }
 }
