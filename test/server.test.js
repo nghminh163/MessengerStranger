@@ -1,3 +1,4 @@
+require("@babel/polyfill");
 import { app } from "../server/app";
 import request from "supertest";
 describe("Test server alive", () => {

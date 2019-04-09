@@ -37,5 +37,8 @@
     "presets": [
       "@babel/preset-env"
     ]
+  },
+  "jest":{
+    "setupFiles": ["<rootDir>/node_modules/regenerator-runtime/runtime"]
   }
 }
