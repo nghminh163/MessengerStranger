@@ -16,20 +16,33 @@ export const Messenges = {
   Paired: Text(
     "2 bạn đã được ghép đôi với nhau, hãy chào nhau để bắt đầu cuộc trò chuyện nhée"
   ),
-  Request: Text(
-    "Vui lòng đợi một chút để chúng mình tìm cho bạn 1 người trò chuyện phù với nhé. Sau 5 phút chúng mình sẽ hủy tìm kiếm để tránh hiện tượng bơ tin nhắn nhau nhé"
-  ),
-  Requested: Text(
-    "Hmm đợi 1 chút nào chúng mình đã gửi yêu cầu tìm bạn của cậu rồi đấy"
-  ),
+  Request: {
+    Send: Text(
+      "Vui lòng đợi một chút để chúng mình tìm cho bạn 1 người trò chuyện phù với nhé. Sau 5 phút chúng mình sẽ hủy tìm kiếm để tránh hiện tượng bơ tin nhắn nhau nhé"
+    ),
+    Sent: Text(
+      "Hmm đợi 1 chút nào chúng mình đã gửi yêu cầu tìm bạn của cậu rồi đấy"
+    )
+  },
   Test: {
     Test1: Text("test1"),
     Test2: Text("test2"),
     Test3: Text("test3")
   },
-  EndPair: Text(
-    "Chúng mình đã hủy tìm kiếm nhé. Vui lòng nhắn 1 thứ gì đó để tìm bạn nhé"
-  ),
-  EndChatReq: Text("Bạn đã dừng cuộc trò chuyện"),
-  EndChatReqP: Text("Bạn đã bị dừng cuộc trò chuyện")
+  End: {
+    Pair: Text(
+      "Chúng mình đã hủy tìm kiếm nhé. Vui lòng nhắn 1 thứ gì đó để tìm bạn nhé"
+    ),
+    Chat: {
+      Active: Text("Bạn đã dừng cuộc trò chuyện"),
+      Passive: Text("Bạn đã bị dừng cuộc trò chuyện")
+    }
+  },
+  ChangeFav: {
+    SuccessMessage: Text("Bạn đã đổi sở thích thành công. Hãy thử ngay nhé"),
+    Male: "Nam",
+    Famale: "Nữ",
+    Any: "Ai cũng được",
+    Ask: "Hãy lựa chọn giới tính của người bạn tiếp theo nhé"
+  }
 };

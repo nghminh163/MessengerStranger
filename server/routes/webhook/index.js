@@ -29,6 +29,7 @@ router.post("/", (req, res) => {
         const text = webhook_event.message.text;
         BotHandle.reply(senderId, pageId, timestamp, text);
       } else if (webhook_event.postback) {
+        BotHandle.handlePostback(senderId, webhook_event.postback.payload);
       }
     });
     res.status(200).send("EVENT_RECEIVED");

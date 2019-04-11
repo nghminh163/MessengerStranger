@@ -9,14 +9,15 @@ import { Text } from "../response";
 export default new class Chatible {
   async handle(senderId, pageId, timestamp, text) {
     const status = await this.handleUser(senderId, timestamp, pageId);
-    this.handleText(senderId, text, status);
     if (status === 0) {
       await Request(senderId, timestamp);
-      FbSendMessage(senderId, Messenges.Request);
+      FbSendMessage(senderId, Messenges.Request.Send);
       Pair();
     } else if (status === 1) {
-      return FbSendMessage(senderId, Messenges.Requested);
+      if (text.toLowerCase() === "pp") return endPairing(senderId);
+      return FbSendMessage(senderId, Messenges.Request.Sent);
     } else {
+      if (text.toLowerCase() === "pp") return endChat(senderId);
       return FbSendMessage(getPartnerId(senderId), Text(text));
     }
   }
@@ -28,17 +29,5 @@ export default new class Chatible {
       }
       resolve(status);
     });
-  }
-  handleText(senderId, text, status) {
-    switch (text.toLowerCase()) {
-      case "pp": {
-        switch (status) {
-          case 1:
-            return endPairing(senderId);
-          case 2:
-            return endChat(senderId);
-        }
-      }
-    }
   }
 }();

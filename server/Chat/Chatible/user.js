@@ -110,14 +110,20 @@ export function getPartnerId(senderId) {
 
 export function endPairing(senderId) {
   WaitingRoom.del(senderId);
-  FbSendMessage(senderId, Messenges.EndPair);
+  FbSendMessage(senderId, Messenges.End.Pair);
 }
+
 export async function endChat(senderId) {
   const partnerId = PairedRoom.get(senderId);
   PairedRoom.del(senderId);
   PairedRoom.del(partnerId);
   await updateUser(senderId, { status: 0, partnerId: null });
   await updateUser(partnerId, { status: 0, partnerId: null });
-  FbSendMessage(senderId, Messenges.EndChatReq);
-  FbSendMessage(partnerId, Messenges.EndChatReqP);
+  FbSendMessage(senderId, Messenges.End.Chat.Active);
+  FbSendMessage(partnerId, Messenges.End.Chat.Passive);
+}
+
+export async function changeFavGender(senderId, favGender) {
+  await updateUser(senderId, { favoriteGender: favGender });
+  FbSendMessage(senderId, Messenges.ChangeFav.SuccessMessage);
 }
