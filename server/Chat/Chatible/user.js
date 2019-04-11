@@ -3,7 +3,6 @@ import { MongoClient } from "mongodb";
 import _ from "lodash";
 import { FbGetUserData, FbSendMessage } from "../../APIs";
 import { PairedRoom, WaitingRoom } from "../store";
-import { Text } from "../response/";
 function createUser(senderId, timestamp, pageId) {
   return new Promise(async resolve => {
     const FbUserData = await FbGetUserData(senderId);
@@ -81,9 +80,9 @@ export default (senderId, timestamp, pageId) => {
     if (_.isNull(dataUser)) {
       dataUser = await createUser(senderId, timestamp, pageId);
     } else {
-      if (dataUser.status === 1) {
-        PairedRoom(senderId, dataUser.partnerId);
-        PairedRoom(dataUser.partnerId, senderId);
+      if (dataUser.status === 2) {
+        PairedRoom.put(senderId, dataUser.partnerId);
+        PairedRoom.put(dataUser.partnerId, senderId);
       }
     }
     resolve(dataUser);
@@ -103,4 +102,22 @@ export async function Request(senderId, timestamp) {
       FbSendMessage(senderId, Text(Messenges.Timeout));
     }
   );
+}
+
+export function getPartnerId(senderId) {
+  return PairedRoom.get(senderId);
+}
+
+export function endPairing(senderId) {
+  WaitingRoom.del(senderId);
+  FbSendMessage(senderId, Messenges.EndPair);
+}
+export async function endChat(senderId) {
+  const partnerId = PairedRoom.get(senderId);
+  PairedRoom.del(senderId);
+  PairedRoom.del(partnerId);
+  await updateUser(senderId, { status: 0, partnerId: null });
+  await updateUser(partnerId, { status: 0, partnerId: null });
+  FbSendMessage(senderId, Messenges.EndChatReq);
+  FbSendMessage(partnerId, Messenges.EndChatReqP);
 }

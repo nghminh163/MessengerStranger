@@ -1,9 +1,8 @@
 import _ from "lodash";
-import {Messeges} from '../../const'
+import { Messenges } from "../../const";
 import { PairedRoom, WaitingRoom } from "../store";
 import { updateUser } from "./user";
 import { FbSendMessage } from "../../APIs";
-import { Text } from "../response/";
 
 export default () => {
   const WaitingRoomId = WaitingRoom.keys();
@@ -37,6 +36,6 @@ async function pair(u1, u2) {
   await updateUser(u2, { status: 2, partnerId: u1 });
   PairedRoom.put(u1, u2);
   PairedRoom.put(u2, u1);
-  FbSendMessage(u1, Text(Messenges.Paired));
-  FbSendMessage(u2, Text(Messenges.Paired));
+  FbSendMessage(u1, Messenges.Paired);
+  FbSendMessage(u2, Messenges.Paired);
 }

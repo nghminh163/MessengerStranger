@@ -1,21 +1,23 @@
 import cache from "memory-cache";
 import _ from "lodash";
-import GetUser, { Request } from "./user";
+import GetUser, { Request, getPartnerId, endPairing, endChat } from "./user";
 import Pair from "./pair";
-import { PairedRoom, checkUserCache } from "../store";
+import { checkUserCache } from "../store";
 import { FbSendMessage } from "../../APIs";
-import { Text } from "../response/";
 import { Messenges } from "../../const";
 export default new class Chatible {
   async handle(senderId, pageId, timestamp, text) {
     const status = await this.handleUser(senderId, timestamp, pageId);
     if (status === 0) {
       await Request(senderId, timestamp);
-      FbSendMessage(senderId, Text(Messenges.Request));
+      FbSendMessage(senderId, Messenges.Request);
       Pair();
     } else if (status === 1) {
-      FbSendMessage(senderId, Text(Messenges.Requested));
+      if (text.toLowerCase() === "pp") return endPairing(senderId);
+      else return FbSendMessage(senderId, Messenges.Requested);
     } else {
+      if (text.toLowerCase() === "pp") return endChat(senderId);
+      else return FbSendMessage(getPartnerId(senderId), Text(text));
     }
   }
   handleUser(senderId, timestamp, pageId) {
