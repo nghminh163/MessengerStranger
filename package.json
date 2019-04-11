@@ -8,6 +8,7 @@
   "dependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/polyfill": "^7.4.3",
     "@babel/runtime": "^7.4.3",
     "body-parser": "^1.18.3",
     "boom": "^7.3.0",
@@ -16,9 +17,9 @@
     "lodash": "^4.17.11",
     "memory-cache": "^0.2.0",
     "mongodb": "^3.2.2",
+    "parse-mongo-url": "^1.1.1",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "@babel/polyfill":"^7.4.3"
+    "request-promise": "^4.2.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

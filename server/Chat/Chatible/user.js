@@ -1,4 +1,4 @@
-import { MongoUri, Messenges, Timeout } from "../../const";
+import { MongoUri, MongoDbName, Messenges, Timeout } from "../../const";
 import { MongoClient } from "mongodb";
 import _ from "lodash";
 import { FbGetUserData, FbSendMessage } from "../../APIs";
@@ -22,7 +22,7 @@ function createUser(senderId, timestamp, pageId) {
         favoriteGender: "any"
       };
       return conn
-        .db("MessengerStranger")
+        .db(MongoDbName)
         .collection("Users")
         .insertOne(json)
         .then(() => {
@@ -38,7 +38,7 @@ function getUser(senderId) {
   return new Promise(resolve => {
     MongoClient.connect(MongoUri, { useNewUrlParser: true }).then(conn => {
       return conn
-        .db("MessengerStranger")
+        .db(MongoDbName)
         .collection("Users")
         .findOne({
           _id: senderId
@@ -56,7 +56,7 @@ export function updateUser(senderId, data) {
   return new Promise(resolve => {
     MongoClient.connect(MongoUri, { useNewUrlParser: true }).then(conn => {
       return conn
-        .db("MessengerStranger")
+        .db(MongoDbName)
         .collection("Users")
         .updateOne(
           {
