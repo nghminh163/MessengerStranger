@@ -1,0 +1,15 @@
+{
+  "name": "Messenger Stranger",
+  "description": "Make Facebook Chatbot same like Chatible or Profoundly",
+  "repository": "https://github.com/nghminh163/MessengerStranger",
+  "keywords": ["node", "express", "chatible", "messenger", "profoundly"],
+  "env": {
+    "page_token": {
+      "description": "Page token",
+      "value": "PAGE_TOKEN"
+    }
+  },
+   "addons": [
+    "mongolab"
+  ],
+}
